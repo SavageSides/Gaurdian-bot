@@ -3,10 +3,10 @@ import json
 import random
 import time
 import asyncio
+import os
 from discord.ext import commands
 from datetime import datetime
 
-TOKEN = "NTAwNDc5NzYyNTYxNzYxMjgw.DqLbrw.XTZWi9YuTfaHDUvTSuc51xedP9M"
 
 
 def prefix(bot, message):
@@ -514,6 +514,6 @@ async def runtime(ctx):
             
             
                 
-                
+ client.run(os.environ.get("TOKEN")               
 
-client.run(TOKEN)
+
