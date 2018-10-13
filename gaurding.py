@@ -519,5 +519,6 @@ async def stats(ctx):
     embed.add_field(name=":thinking: Others", value=f"• Been Online for **{elapsed.days}** days, **{hours}** hours, **{minutes}** minutes, **{seconds}** seconds", inline=False)
     await client.say(embed=embed)
     
-   
+
+starttime = datetime.utcnow()  
 client.run(os.environ.get("TOKEN"))              
