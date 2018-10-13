@@ -50,6 +50,7 @@ async def prefix(ctx, new_prefix):
         
 @client.command(pass_context=True)
 async def crole(ctx, *, role = None):
+    server = ctx.message.server
     try:
         if ctx.message.author.server_permissions.manage_roles:
             if role is None:
