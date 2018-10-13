@@ -15,6 +15,7 @@ def prefix(bot, message):
     return prefixes.get(id, default_prefix)
 
 client = commands.Bot(command_prefix=prefix)
+client.remove_command("help")
 
 @client.event
 async def on_server_join(server):
