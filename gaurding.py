@@ -203,8 +203,8 @@ async def rolecolor(ctx, colour : discord.Colour = None, *, name : discord.Role 
     author = ctx.message.author
     try:
         if ctx.message.author.server_permissions.manage_roles:
-            role = discord.utils.get(ctx.message.server.roles, name=name)
-            if role is None:
+            roles = discord.utils.get(ctx.message.server.roles, name=name)
+            if roles is None:
                 embed = discord.Embed(color=0xff0200)
                 embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
                 embed.add_field(name=":x: Error", value=f"There was a unknown error. ```Error: No role called; {name}```")
