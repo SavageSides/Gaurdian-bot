@@ -307,7 +307,7 @@ async def mute(ctx, user: discord.Member = None):
         await client.say(embed=embed)
 
 @client.command(pass_context=True)
-async def unmute(ctx, user: discord.Member = No):
+async def unmute(ctx, user: discord.Member = None):
     try:
         if ctx.message.author.server_permissions.mute_members:
             MutedRole = discord.utils.get(ctx.message.server.roles, name="Muted")
