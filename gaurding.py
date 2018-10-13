@@ -239,7 +239,7 @@ async def ban(ctx, user: discord.Member = None):
         await client.say(embed=embed)
 
 @client.command(pass_context=True)
-async def purge(ctx ,*, amount: int = None):
+async def purge(ctx ,*, amount: int = None, limit=1000):
     try:
         if ctx.message.author.server_permissions.manage_messages:
             if amount is None:
