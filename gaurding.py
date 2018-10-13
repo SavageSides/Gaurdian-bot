@@ -210,12 +210,12 @@ async def rolecolor(ctx, colour : discord.Colour = None, *, name : discord.Role 
                 embed.add_field(name=":x: Error", value=f"There was a unknown error. ```Error: No role called; {name}```")
                 await client.say(embed=embed)
                 return
-              if colour is None:
-                    embed = discord.Embed(color=0xff0200)
-                    embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
-                    embed.add_field(name=":x: Error", value=f"There was a unknown error. ```Error: Define a Colour```")
-                    await client.say(embed=embed)
-                    return                   
+            if colour is None:
+                embed = discord.Embed(color=0xff0200)
+                embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
+                embed.add_field(name=":x: Error", value=f"There was a unknown error. ```Error: Define a Colour```")
+                await client.say(embed=embed)
+                return
             await client.edit_role(ctx.message.server, role, colour=colour)
             embed = discord.Embed(color=0x4e09ff)
             embed.add_field(name=":white_check_mark: Sucessful!", value="Role was removed.. **Read** Following Information")
