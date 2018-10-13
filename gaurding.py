@@ -63,7 +63,7 @@ async def crole(ctx, *, role = None):
             await client.create_role(server=server, name=role)
             embed = discord.Embed(color=0x4e09ff)
             embed.add_field(name=":white_check_mark: Sucessful!", value="Role was created.. **Read** Following Information")
-            embed.add_field(name="Role:", value=f"{role}")
+            embed.add_field(name="Role:", value=f"{role}", inline=False)
             await client.say(embed=embed)
         else:
             embed = discord.Embed(color=0xff0200)
