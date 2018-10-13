@@ -199,7 +199,7 @@ async def removerole(ctx, user: discord.Member = None, *, name = None):
         await client.say(embed=embed)
         
 @client.command(pass_context=True, no_pm=True)
-async def rolecolor(ctx, colour : discord.Colour = None, *, name : discord.Role = None):
+async def rolecolor(ctx, colour : discord.Colour = None, *, name = None):
     author = ctx.message.author
     try:
         if ctx.message.author.server_permissions.manage_roles:
@@ -216,7 +216,7 @@ async def rolecolor(ctx, colour : discord.Colour = None, *, name : discord.Role 
                 embed.add_field(name=":x: Error", value=f"There was a unknown error. ```Error: Define a Colour```")
                 await client.say(embed=embed)
                 return
-            await client.edit_role(ctx.message.server, role, colour=colour)
+            await client.edit_role(ctx.message.server, roles, colour=colour)
             embed = discord.Embed(color=0x4e09ff)
             embed.add_field(name=":white_check_mark: Sucessful!", value="Role was removed.. **Read** Following Information")
             embed.add_field(name="Role:", value=f"{role}", inline=False)
