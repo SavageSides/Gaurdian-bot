@@ -124,6 +124,7 @@ async def drole(ctx, *, name = None):
         
 @client.command(pass_context=True)
 async def addrole(ctx, user: discord.Member = None, *, name = None):
+    author = ctx.message.author
     try:
         if ctx.message.author.server_permissions.manage_roles:
             role = discord.utils.get(ctx.message.server.roles, name=name)
