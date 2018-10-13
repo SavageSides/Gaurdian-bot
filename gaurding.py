@@ -35,7 +35,7 @@ async def help(ctx):
     embed.add_field(name="Moderation", value="-kick @User Kicks the user from the server \n -ban @User Bans the user from the server \n -mute @User Gives that user the muted role along with him not being able to talk \n -unmute @User Takes away the Muted role from the user allowing him to talk \n -strike @User Adds one strike the the user you have mentioned \n -rmstrikes @User Removes all of the users strikes \n -strikes @User Shows that current amount of strikes the user has \n -unban User or ID It will unban a certan user and if you jsut did **-unban** It would unban the first person on the list \n -prefix <prefix> Will set that prefix to my dictanary of commands \n -purge <Amount> It will clear the chat P.S it can only clear [2, 100]", inline=False)
     embed.add_field(name="Role Management", value="-crole <Role Name> Creates the role for your server \n -drole <Role Name> Deletes the role from your server \n -addrole @User <Role Name> Adds the role just like mute but it adds the name of the role to the user \n -removerole @User <Role Name> Removes the role you have said from the user you have mentioned \n -rolecolor <Color> <Role Name> Sets the color for that role for the role you have said", inline=False)
     embed.add_field(name="Misc", value="-configs Shows all of the current configuable commands I have at the moment \n -stats Shows all of my stats \n -uptime Shows you how long I have been awake \n -poll Will go step by step for you to make your dream poll", inline=False)
-    
+    await client.say(embed=embed)
     
 
 @client.command()
