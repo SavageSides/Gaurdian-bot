@@ -26,27 +26,6 @@ async def on_server_join(server):
     await client.send_message(owner, embed=embed)
     
     
-@client.command()
-@commands.cooldown(25, 10, commands.BucketType.user)
-async def pgif(ctx):
-    """Posts a Random PrOn GIF"""
-    _ = await client._get_text(ctx)
-    if not ctx.message.channel.is_nsfw():
-        await client.say(_("This is not a NSFW Channel <:deadStare:417437129501835279>"))
-        return
-    if await cleint.__has_voted(ctx.author.id):
-        em = discord.Embed(color=0xDEADBF)
-        em.set_image(url=await client.nekobot.image("pgif"))
-
-        await client.say(embed=em)
-    else:
-        embed = discord.Embed(color=0xDEADBF,
-                                title="WOAH",
-                                description=_("Have you voted yet <:smirkGuns:417969421252952085>\n"
-                                            "https://discordbots.org/bot/310039170792030211/vote"))
-        if not ctx.message.channel.is_nsfw():
-            embed.set_footer(text=_("Use in a NSFW Channel BTW..."))
-        await client.say(embed=embed)
         
         
 @client.event
@@ -79,16 +58,18 @@ async def prefix(ctx, new_prefix):
     with open("serverConfig.json", "r") as f:
         prefixes = json.load(f)
     author = ctx.message.author
-    if ctx.message.author.server_permissions.manage_server:
-        prefixes[ctx.message.server.id] = new_prefix
-        embed = discord.Embed(color=0xff05cf)
-        embed.add_field(name="Prefix changed...", value=f"``{new_prefix}``")
-        await client.say(embed=embed)
-    else:
-         embed = discord.Embed(color=0xff0200)
-         embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
-         embed.add_field(name=":x: Error", value="You are missing some permissions there bud. ```Permissions: Manage Server```", inline=False)
-         await client.say(embed=embed)
+    if await cleint.__has_voted(author.id):
+        if ctx.message.author.server_permissions.manage_server:
+            prefixes[ctx.message.server.id] = new_prefix
+            embed = discord.Embed(color=0xff05cf)
+            embed.add_field(name="Prefix changed...", value=f"``{new_prefix}``")
+            await client.say(embed=embed)
+        else:
+            embed = discord.Embed(color=0xff0200)
+            embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
+            embed.add_field(name=":x: Error", value="You are missing some permissions there bud. ```Permissions: Manage Server```", inline=False)
+            await client.say(embed=embed)
+    await client.say("YOU HAVENT VOTED YET!")
     with open("serverConfig.json", "w") as f:
         json.dump(prefixes, f)
    
