@@ -261,6 +261,7 @@ async def purge(ctx ,*, amount: int = None):
             await client.delete_message(msg)
        else:
            embed = discord.Embed(color=0xff0200)
+           author = ctx.message.author
            embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
            embed.add_field(name=":x: Error", value="You are missing some permissions there bud. ```Permissions: Ban Members```", inline=False)
            await client.say(embed=embed)
