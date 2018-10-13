@@ -4,6 +4,7 @@ import random
 import time
 import asyncio
 import os
+import neokbot
 from discord.ext import commands
 from datetime import datetime
 
@@ -23,7 +24,31 @@ async def on_server_join(server):
     embed = discord.Embed(color=0xff0251)
     embed.add_field(name=":wave: Supppp", value=f"Hey.. Thanks for adding me to **{server.name}**. I am a moderation bot! You can type -help for everything!", inline=False)
     await client.send_message(owner, embed=embed)
+    
+    
+@client.command()
+@commands.cooldown(25, 10, commands.BucketType.user)
+async def pgif(ctx):
+    """Posts a Random PrOn GIF"""
+    _ = await client._get_text(ctx)
+    if not ctx.message.channel.is_nsfw():
+        await client.say(_("This is not a NSFW Channel <:deadStare:417437129501835279>"))
+        return
+    if await cleint.__has_voted(ctx.author.id):
+        em = discord.Embed(color=0xDEADBF)
+        em.set_image(url=await client.nekobot.image("pgif"))
 
+        await client.say(embed=em)
+    else:
+        embed = discord.Embed(color=0xDEADBF,
+                                title="WOAH",
+                                description=_("Have you voted yet <:smirkGuns:417969421252952085>\n"
+                                            "https://discordbots.org/bot/310039170792030211/vote"))
+        if not ctx.message.channel.is_nsfw():
+            embed.set_footer(text=_("Use in a NSFW Channel BTW..."))
+        await client.say(embed=embed)
+        
+        
 @client.event
 async def on_ready():
     print("Loading...")
