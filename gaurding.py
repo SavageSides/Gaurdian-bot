@@ -41,8 +41,8 @@ async def configs():
 async def prefix(ctx, new_prefix):
     with open("serverConfig.json", "r") as f:
         prefixes = json.load(f)
+    author = ctx.message.author
     if ctx.message.author.server_permissions.manage_server:
-        
         prefixes[ctx.message.server.id] = new_prefix
         embed = discord.Embed(color=0xff05cf)
         embed.add_field(name="Prefix changed...", value=f"``{new_prefix}``")
