@@ -47,6 +47,36 @@ async def prefix(ctx, new_prefix):
     await client.say(embed=embed)
     with open("serverConfig.json", "w") as f:
         json.dump(prefixes, f)
+        
+@client.command(pass_context=True)
+async def crole(ctx, *, role = None):
+    try:
+        if ctx.message.author.server_permissions.manage_roles:
+            if role is None:
+                embed = discord.Embed(color=0xff0200)
+                embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
+                embed.add_field(name=":x: Error", value="You are missing some requirements for this command. ```A role name is a missing argument.```", inline=False)
+                await client.say(embed=embed)
+                return
+            await client.create_role(server=server, name=role)
+            embed = discord.Embed(color=0x4e09ff)
+            embed.add_field(name=":white_check_mark: Sucessful!", value="Role was created.. **Read** Following Information")
+            embed.add_field(name="Role:", value=f"{role}")
+            await client.say(embed=embed)
+        else:
+            embed = discord.Embed(color=0xff0200)
+            embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
+            embed.add_field(name=":x: Error", value="You are missing some permissions there bud. ```Permissions: Kick Members```", inline=False)
+            await client.say(embed=embed)
+    except discord.Forbidden:
+        embed = discord.Embed(color=0xff0200)
+        author = ctx.message.author
+        embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
+        embed.add_field(name=":x: Error", value="There was an error. ```1. I don't have permissions to make roles```", inline=False)
+        await client.say(embed=embed)
+    
+            
+            
 
 
 
