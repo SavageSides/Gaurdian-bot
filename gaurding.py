@@ -68,7 +68,43 @@ async def crole(ctx, *, role = None):
         else:
             embed = discord.Embed(color=0xff0200)
             embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
-            embed.add_field(name=":x: Error", value="You are missing some permissions there bud. ```Permissions: Kick Members```", inline=False)
+            embed.add_field(name=":x: Error", value="You are missing some permissions there bud. ```Permissions: manage Roles```", inline=False)
+            await client.say(embed=embed)
+    except discord.Forbidden:
+        embed = discord.Embed(color=0xff0200)
+        author = ctx.message.author
+        embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
+        embed.add_field(name=":x: Error", value="There was an error. ```1. I don't have permissions to make roles```", inline=False)
+        await client.say(embed=embed)
+        
+@client.command(pass_context=True)
+async def drole(ctx, *, name = None):
+    server = ctx.message.server
+    author = ctx.message.author
+    try:
+        if ctx.message.author.server_permissions.manage_roles:
+            role = discord.utils.get(ctx.message.server.roles, name=name)
+            if role is None:
+                embed = discord.Embed(color=0xff0200)
+                embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
+                embed.add_field(name=":x: Error", value="There was a unknown error. ```Error: No role called; {name}```")
+                await client.say(embed=embed)
+                return
+            if name is None:
+                embed = discord.Embed(color=0xff0200)
+                embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
+                embed.add_field(name=":x: Error", value="You are missing some requirements for this command. ```A role name is a missing argument.```", inline=False)
+                await client.say(embed=embed)
+                return
+            await client.delete_role(server=server, role=role)
+            embed = discord.Embed(color=0x4e09ff)
+            embed.add_field(name=":white_check_mark: Sucessful!", value="Role was deleted.. **Read** Following Information")
+            embed.add_field(name="Role:", value=f"{role}", inline=False)
+            await client.say(embed=embed)
+        else:
+            embed = discord.Embed(color=0xff0200)
+            embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
+            embed.add_field(name=":x: Error", value="You are missing some permissions there bud. ```Permissions: Manage Roles```", inline=False)
             await client.say(embed=embed)
     except discord.Forbidden:
         embed = discord.Embed(color=0xff0200)
