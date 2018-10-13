@@ -256,7 +256,9 @@ async def purge(ctx ,*, amount: int = None):
             embed = discord.Embed(color=0x4e09ff)
             embed.add_field(name=":white_check_mark: Sucessful!", value="Messages have been cleared.. **Read** Following Information")
             embed.add_field(name="Amount:", value=f"{amount}", inline=False)
-            await client.say(embed=embed)
+            msg = await client.say(embed=embed)
+            await asyncio.sleep(3)
+            await client.delete_message(msg)
         else:
             embed = discord.Embed(color=0xff0200)
             embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
