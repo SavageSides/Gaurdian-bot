@@ -4,7 +4,6 @@ import random
 import time
 import asyncio
 import os
-import neokbot
 from discord.ext import commands
 from datetime import datetime
 
