@@ -267,10 +267,15 @@ async def purge(ctx ,*, amount: int = None):
         await client.say(embed=embed)
 
 @client.command(pass_context=True)
-async def mute(ctx, user: discord.Member):
+async def mute(ctx, user: discord.Member = None):
     try:
         if ctx.message.author.server_permissions.mute_members:
             MutedRole = discord.utils.get(ctx.message.server.roles, name="Muted")
+            if user is None:
+                embed = discord.Embed(color=0xff0200)
+                embed.add_field(name=":x: Error", value="You are missing some arguments. ```User is a required argument.```")
+                await client.say(embed=embed)
+                return
             if MutedRole is None:
                 embed = discord.Embed(color=0xff0200)
                 author = ctx.message.author
@@ -302,10 +307,15 @@ async def mute(ctx, user: discord.Member):
         await client.say(embed=embed)
 
 @client.command(pass_context=True)
-async def unmute(ctx, user: discord.Member):
+async def unmute(ctx, user: discord.Member = No):
     try:
         if ctx.message.author.server_permissions.mute_members:
             MutedRole = discord.utils.get(ctx.message.server.roles, name="Muted")
+            if user is None:
+                embed = discord.Embed(color=0xff0200)
+                embed.add_field(name=":x: Error", value="You are missing some arguments. ```User is a required argument.```")
+                await client.say(embed=embed)
+                return
             if MutedRole is None:
                 embed = discord.Embed(color=0xff0200)
                 author = ctx.message.author
