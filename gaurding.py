@@ -141,6 +141,7 @@ async def addrole(ctx, user: discord.Member = None, *, name = None):
             await client.say(embed=embed)
         else:
             embed = discord.Embed(color=0xff0200)
+            author = ctx.message.author
             embed.set_author(icon_url=author.avatar_url, name="Uh Oh.")
             embed.add_field(name=":x: Error", value="You are missing some permissions there bud. ```Permissions: Manage Roles```", inline=False)
             await client.say(embed=embed)
