@@ -7,12 +7,10 @@ import os
 from discord.ext import commands
 from datetime import datetime
 
-
-
 def prefix(bot, message):
     with open("serverConfig.json") as f:
         prefixes = json.load(f)
-    default_prefix = "!"
+    default_prefix = "-"
     id = message.server.id
     return prefixes.get(id, default_prefix)
 
@@ -497,23 +495,29 @@ async def poll(ctx):
     msg = await client.send_message(channel, embed=embed)
     await client.add_reaction(msg, "\U00002705")
     await client.add_reaction(msg, "\U0000274c")
-    
-    
 
 @client.command(pass_context=True)
-async def runtime(ctx):
-    starttime = datetime.utcnow()
+async def uptime(ctx):
     now = datetime.utcnow()
     elapsed = now - starttime
     seconds = elapsed.seconds
     minutes, seconds = divmod(seconds, 60)
     hours, minutes = divmod(minutes, 60)
-    await client.say("Running for {}d {}h {}m {}s".format(elapsed.days, hours, minutes, seconds))
+    embed = discord.Embed(color=0x0717f3)
+    embed.add_field(name="Gaurdian Uptime", value=f"• I've been online for **{elapsed.days}** days, **{hours}** hours, **{minutes}** minutes, **{seconds}** seconds")
+    await client.say(embed=embed)
 
-        
-            
-            
-                
- client.run(os.environ.get("TOKEN")               
-
-
+@client.command(pass_context=True)
+async def stats(ctx):
+    now = datetime.utcnow()
+    elapsed = now - starttime
+    seconds = elapsed.seconds
+    minutes, seconds = divmod(seconds, 60)
+    hours, minutes = divmod(minutes, 60)
+    embed = discord.Embed(color=0x0717f3)
+    embed.add_field(name="Discord", value=f"• Watching **{len(client.servers)}** servers \n • Hosting **{len(set(client.get_all_members()))}** users")
+    embed.add_field(name=":thinking: Others", value=f"• Been Online for **{elapsed.days}** days, **{hours}** hours, **{minutes}** minutes, **{seconds}** seconds", inline=False)
+    await client.say(embed=embed)
+    
+   
+ client.run(os.environ.get("TOKEN")              
