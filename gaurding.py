@@ -4,6 +4,7 @@ import random
 import time
 import asyncio
 import os
+import requests
 from discord.ext import commands
 from datetime import datetime
 
@@ -738,6 +739,24 @@ async def stats(ctx):
     embed.add_field(name="Discord", value=f"• Watching **{len(client.servers)}** servers \n • Hosting **{len(set(client.get_all_members()))}** users")
     embed.add_field(name=":thinking: Others", value=f"• Been Online for **{elapsed.days}** days, **{hours}** hours, **{minutes}** minutes, **{seconds}** seconds", inline=False)
     await client.say(embed=embed)
+    
+@client.command(pass_context=True)
+async def dog(ctx):
+        response = requests.get('https://random.dog/woof.json')
+        data = response.json()
+        embed = discord.Embed(title="Cute Doggys!", color=0x08202D)
+        embed.set_image(url=f"{data['url']}")
+        embed.set_footer(text=f"Requested By: {ctx.message.author}")
+        await client.say(embed=embed)
+
+@client.command(pass_context=True)
+async def meme(ctx):
+        response = requests.get('https://some-random-api.ml/meme')
+        data = response.json()
+        embed = discord.Embed(description =f"{data['text']}", color=0x08202D)
+        embed.set_image(url=f"{data['url']}")
+        embed.set_footer(text=f"Requested By: {ctx.message.author}")
+        await client.say(embed=embed)
     
 
 starttime = datetime.utcnow()  
